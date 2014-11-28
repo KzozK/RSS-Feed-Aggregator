@@ -22,3 +22,38 @@ C:\Users\omer\Documents\Visual Studio 2013\Projects\FeedReader\FeedReader\Bin\De
 C:\Users\omer\Documents\Visual Studio 2013\Projects\FeedReader\FeedReader\Bin\Debug\FeedReader_Debug_AnyCPU.xap
 C:\Users\omer\Documents\Visual Studio 2013\Projects\FeedReader\FeedReader\obj\Debug\XapCacheFile.xml
 C:\Users\omer\Documents\Visual Studio 2013\Projects\FeedReader\FeedReader\obj\Debug\FeedReader.csprojResolveAssemblyReference.cache
+C:\Users\omer\Documents\GitHub\RSS-Feed-Aggregator\mobilApp\FeedReader\obj\Debug\App.g.cs
+C:\Users\omer\Documents\GitHub\RSS-Feed-Aggregator\mobilApp\FeedReader\obj\Debug\View\Auth\CreateAccount.g.cs
+C:\Users\omer\Documents\GitHub\RSS-Feed-Aggregator\mobilApp\FeedReader\obj\Debug\View\Auth\Login.g.cs
+C:\Users\omer\Documents\GitHub\RSS-Feed-Aggregator\mobilApp\FeedReader\obj\Debug\View\MainPage.g.cs
+C:\Users\omer\Documents\GitHub\RSS-Feed-Aggregator\mobilApp\FeedReader\obj\Debug\FeedReader.g.resources
+C:\Users\omer\Documents\GitHub\RSS-Feed-Aggregator\mobilApp\FeedReader\obj\Debug\FeedReader.Resources.AppResources.resources
+C:\Users\omer\Documents\GitHub\RSS-Feed-Aggregator\mobilApp\FeedReader\obj\Debug\FeedReader.csproj.GenerateResource.Cache
+C:\Users\omer\Documents\GitHub\RSS-Feed-Aggregator\mobilApp\FeedReader\Bin\Debug\Assets\ApplicationIcon.png
+C:\Users\omer\Documents\GitHub\RSS-Feed-Aggregator\mobilApp\FeedReader\Bin\Debug\Assets\Tiles\FlipCycleTileLarge.png
+C:\Users\omer\Documents\GitHub\RSS-Feed-Aggregator\mobilApp\FeedReader\Bin\Debug\Assets\Tiles\FlipCycleTileMedium.png
+C:\Users\omer\Documents\GitHub\RSS-Feed-Aggregator\mobilApp\FeedReader\Bin\Debug\Assets\Tiles\FlipCycleTileSmall.png
+C:\Users\omer\Documents\GitHub\RSS-Feed-Aggregator\mobilApp\FeedReader\Bin\Debug\Assets\Tiles\IconicTileMediumLarge.png
+C:\Users\omer\Documents\GitHub\RSS-Feed-Aggregator\mobilApp\FeedReader\Bin\Debug\Assets\Tiles\IconicTileSmall.png
+C:\Users\omer\Documents\GitHub\RSS-Feed-Aggregator\mobilApp\FeedReader\Bin\Debug\FeedReader.dll
+C:\Users\omer\Documents\GitHub\RSS-Feed-Aggregator\mobilApp\FeedReader\Bin\Debug\FeedReader.pdb
+C:\Users\omer\Documents\GitHub\RSS-Feed-Aggregator\mobilApp\FeedReader\Bin\Debug\AppManifest.xaml
+C:\Users\omer\Documents\GitHub\RSS-Feed-Aggregator\mobilApp\FeedReader\Bin\Debug\Properties\WMAppManifest.xml
+C:\Users\omer\Documents\GitHub\RSS-Feed-Aggregator\mobilApp\FeedReader\Bin\Debug\FeedReader_Debug_AnyCPU.xap
+C:\Users\omer\Documents\GitHub\RSS-Feed-Aggregator\mobilApp\FeedReader\Bin\Debug\Microsoft.Expression.Drawing.dll
+C:\Users\omer\Documents\GitHub\RSS-Feed-Aggregator\mobilApp\FeedReader\Bin\Debug\SlideView.Library.dll
+C:\Users\omer\Documents\GitHub\RSS-Feed-Aggregator\mobilApp\FeedReader\obj\Debug\FeedReader.dll
+C:\Users\omer\Documents\GitHub\RSS-Feed-Aggregator\mobilApp\FeedReader\obj\Debug\FeedReader.pdb
+C:\Users\omer\Documents\GitHub\RSS-Feed-Aggregator\mobilApp\FeedReader\obj\Debug\XapCacheFile.xml
+C:\Users\omer\Documents\GitHub\RSS-Feed-Aggregator\mobilApp\FeedReader\obj\Debug\FeedReader.csprojResolveAssemblyReference.cache
+C:\Users\omer\Documents\GitHub\RSS-Feed-Aggregator\mobilApp\FeedReader\Bin\Debug\System.ServiceModel.Syndication.dll
+C:\Users\omer\Documents\GitHub\RSS-Feed-Aggregator\mobilApp\FeedReader\Bin\Debug\System.ServiceModel.Syndication.xml
+C:\Users\omer\Documents\GitHub\RSS-Feed-Aggregator\mobilApp\FeedReader\Bin\Debug\de\System.ServiceModel.Syndication.resources.dll
+C:\Users\omer\Documents\GitHub\RSS-Feed-Aggregator\mobilApp\FeedReader\Bin\Debug\es\System.ServiceModel.Syndication.resources.dll
+C:\Users\omer\Documents\GitHub\RSS-Feed-Aggregator\mobilApp\FeedReader\Bin\Debug\fr\System.ServiceModel.Syndication.resources.dll
+C:\Users\omer\Documents\GitHub\RSS-Feed-Aggregator\mobilApp\FeedReader\Bin\Debug\it\System.ServiceModel.Syndication.resources.dll
+C:\Users\omer\Documents\GitHub\RSS-Feed-Aggregator\mobilApp\FeedReader\Bin\Debug\ja\System.ServiceModel.Syndication.resources.dll
+C:\Users\omer\Documents\GitHub\RSS-Feed-Aggregator\mobilApp\FeedReader\Bin\Debug\ko\System.ServiceModel.Syndication.resources.dll
+C:\Users\omer\Documents\GitHub\RSS-Feed-Aggregator\mobilApp\FeedReader\Bin\Debug\ru\System.ServiceModel.Syndication.resources.dll
+C:\Users\omer\Documents\GitHub\RSS-Feed-Aggregator\mobilApp\FeedReader\Bin\Debug\zh-Hans\System.ServiceModel.Syndication.resources.dll
+C:\Users\omer\Documents\GitHub\RSS-Feed-Aggregator\mobilApp\FeedReader\Bin\Debug\zh-Hant\System.ServiceModel.Syndication.resources.dll

@@ -3,5 +3,6 @@
     <AssemblyPart x:Name="FeedReader" Source="FeedReader.dll" />
     <AssemblyPart x:Name="Microsoft.Expression.Drawing" Source="Microsoft.Expression.Drawing.dll" />
     <AssemblyPart x:Name="SlideView.Library" Source="SlideView.Library.dll" />
+    <AssemblyPart x:Name="System.ServiceModel.Syndication" Source="System.ServiceModel.Syndication.dll" />
   </Deployment.Parts>
 </Deployment>

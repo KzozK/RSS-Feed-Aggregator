@@ -96,9 +96,10 @@
     </Compile>
     <Compile Include="CategoryKeyGroup.cs" />
     <Compile Include="LocalizedStrings.cs" />
-    <Compile Include="Model\CategoryModel.cs" />
-    <Compile Include="Model\FeedModel.cs" />
-    <Compile Include="Model\NewsModel.cs" />
+    <Compile Include="Model\AccountBindingModels.cs" />
+    <Compile Include="Model\AccountViewModels.cs" />
+    <Compile Include="Model\Category.cs" />
+    <Compile Include="Model\Rss.cs" />
     <Compile Include="View\Auth\CreateAccount.xaml.cs">
       <DependentUpon>CreateAccount.xaml</DependentUpon>
     </Compile>
@@ -177,6 +178,9 @@
     <Reference Include="Microsoft.Expression.Drawing" />
     <Reference Include="SlideView.Library">
       <HintPath>..\packages\SlideView.1.4.2\lib\wp8\SlideView.Library.dll</HintPath>
+    </Reference>
+    <Reference Include="System.ServiceModel.Syndication">
+      <HintPath>..\..\..\..\..\..\..\Program Files (x86)\Microsoft SDKs\Silverlight\v4.0\Libraries\Client\System.ServiceModel.Syndication.dll</HintPath>
     </Reference>
   </ItemGroup>
   <ItemGroup />

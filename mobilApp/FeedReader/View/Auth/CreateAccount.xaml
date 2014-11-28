@@ -28,6 +28,15 @@
 
         <!--ContentPanel - place additional content here-->
         <Grid x:Name="ContentPanel" Grid.Row="1" Margin="12,0,12,0">
+            <StackPanel>
+                <TextBlock Text="E-mail"/>
+                <TextBox x:Name="emailTextBox" />
+                <TextBlock Text="password"/>
+                <TextBox x:Name="paswordTextBox" />
+                <TextBlock Text="confirm password"/>
+                <TextBox x:Name="confirmPaswordTextBox" />
+                <Button x:Name="createAccountButton" Content="Create account" Click="createAccountButton_Click" />
+            </StackPanel>
 
         </Grid>
     </Grid>

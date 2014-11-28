@@ -28,13 +28,13 @@
                         <DataTemplate>
                             <StackPanel Orientation="Vertical">
 
-                                <TextBlock Text="{Binding categoryName}" Margin="20 0 0 0" />
-                                <ListBox ItemsSource="{Binding feedList}" ScrollViewer.VerticalScrollBarVisibility="Disabled" SelectionChanged="CategoryList_SelectionChanged">
+                                <TextBlock Text="{Binding Name}" Margin="20 0 0 0" />
+                                <ListBox ItemsSource="{Binding rssFeedList}" ScrollViewer.VerticalScrollBarVisibility="Disabled" SelectionChanged="RssListBox_SelectionChanged">
                                     <ListBox.ItemTemplate>
                                         <DataTemplate>
                                             <StackPanel Orientation="Horizontal">
                                                 <Image x:Name="categoryImage" Source="{Binding image}" Width="10" Height="10" />
-                                                <TextBlock x:Name="categoryTextBlock" Text="{Binding name}" Margin="20 0 0 0" />
+                                                <TextBlock x:Name="categoryTextBlock" Text="{Binding Flux}" Margin="20 0 0 0" />
                                             </StackPanel>
                                         </DataTemplate>
                                     </ListBox.ItemTemplate>
@@ -43,65 +43,6 @@
                         </DataTemplate>
 
                     </phone:LongListSelector.ItemTemplate>
-
-                    <!--
-                    <phone:LongListSelector.JumpListStyle>
-
-                        <Style>
-                            <Setter Property="GridCellSize"  Value="113,113"/>
-                            <Setter Property="LayoutMode" Value="Grid" />
-                            <Setter Property="ItemTemplate">
-                                <Setter.Value>
-                                    <DataTemplate>
-                                        <Border Background="{Binding Converter={StaticResource BackgroundConverter}}" Width="113" Height="113" Margin="6" >
-                                            <TextBlock Text="{Binding Key}" FontFamily="{StaticResource PhoneFontFamilySemiBold}" FontSize="48" Padding="6" 
-               Foreground="{Binding Converter={StaticResource ForegroundConverter}}" VerticalAlignment="Center"/>
-                                        </Border>
-                                    </DataTemplate>
-                                </Setter.Value>
-                            </Setter>
-                        </Style>
-                    </phone:LongListSelector.JumpListStyle>
--->
-                    <!--<phone:LongListSelector.GroupHeaderTemplate>
-                        <DataTemplate>
-                            <Border Background="Transparent" Padding="5">
-                                <Border Background="{StaticResource PhoneAccentBrush}" 
-                                        BorderBrush="{StaticResource PhoneAccentBrush}" 
-                                        BorderThickness="2" Width="62" 
-                                        Height="62" Margin="0,0,18,0" HorizontalAlignment="Left">
-                                    <TextBlock Text="{Binding Key}" Foreground="{StaticResource PhoneForegroundBrush}" 
-                                               FontSize="48" Padding="6" 
-                                               FontFamily="{StaticResource PhoneFontFamilySemiLight}" 
-                                               HorizontalAlignment="Left" VerticalAlignment="Center"/>
-                                </Border>
-                            </Border>
-                        </DataTemplate>
-                    </phone:LongListSelector.GroupHeaderTemplate>
-
-                    <phone:LongListSelector.ItemTemplate>
-                        <DataTemplate>
-                            <StackPanel>
-                                <TextBlock Text="{Binding categoryName}"/>
-                                <ListBox x:Name="FeedListBox" ItemsSource="{Binding feedList}" SelectionChanged="FeedListBox_SelectionChanged">
-                                    <ListBox.ItemsPanel>
-                                        <ItemsPanelTemplate>
-                                            <StackPanel Orientation="Horizontal" />
-                                        </ItemsPanelTemplate>
-                                    </ListBox.ItemsPanel>
-                                    <ListBox.ItemTemplate>
-                                        <DataTemplate>
-                                            <StackPanel Orientation="Horizontal">
-                                                <Image x:Name="itemImage" Source="{Binding image}" Width="30" Height="30" />
-                                                <TextBlock Text="{Binding name}" Margin="0,0,12,0" />
-                                            </StackPanel>
-                                        </DataTemplate>
-                                    </ListBox.ItemTemplate>
-                                </ListBox>
-                            </StackPanel>
-                        </DataTemplate>
-
-                    </phone:LongListSelector.ItemTemplate>-->
 
                 </phone:LongListSelector>
 
@@ -134,8 +75,8 @@
                     <ListBox.ItemTemplate>
                         <DataTemplate>
                             <StackPanel Orientation="Horizontal">
-                                <!--<Image Source="{Binding priorityImage}" Width="30" Height="30" />
-                                <TextBlock x:Name="taskTextBlock" Text="{Binding taskName}" Margin="20 0 0 0" />-->
+                                <!--<Image Source="{Binding priorityImage}" Width="30" Height="30" />-->
+                                <TextBlock Foreground="Blue" Text="{Binding Title.Text}" Margin="20 0 0 0" />
                             </StackPanel>
                         </DataTemplate>
                     </ListBox.ItemTemplate>
