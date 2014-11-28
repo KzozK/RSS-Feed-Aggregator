@@ -13,19 +13,22 @@ using Windows.Storage;
 using Windows.Storage.Streams;
 using System.Runtime.Serialization;
 using System.Runtime.InteropServices.WindowsRuntime;
+using System.Text;
 
 namespace FeedReader
 {
     public partial class Login : PhoneApplicationPage
     {
         public const string fileName = "UserDetails";
-        UserDetail user;
+        UserDetail user = new UserDetail();
 
         public Login() // CALLED FIRST, BEFORE MAINPAGE
         {
             InitializeComponent();
-            restore();
+            //restore();
         }
+
+        #region Save to local file
 
         private async void restore()
         {
@@ -73,6 +76,8 @@ namespace FeedReader
             }
         }
 
+        #endregion
+
         private bool checkLogInPassword()
         {
             if (loginBox.Text.Count() > 0 && passwordBox.Password.Count() > 0)
@@ -82,19 +87,90 @@ namespace FeedReader
             return false;
         }
 
-        private async void Connection_Click(object sender, RoutedEventArgs e)
+        private void Connection_Click(object sender, RoutedEventArgs e)
         {
             if (checkLogInPassword())
             {
                 user.login = loginBox.Text;
                 user.password = passwordBox.Password;
-                await saveUserDetailAsync(); // sa plante apres 3 appel a verifier
-                NavigationService.Navigate(new Uri("/View/MainPage.xaml", UriKind.Relative));
+
+                HttpWebRequest requete = (HttpWebRequest)HttpWebRequest.Create("http://rssfeedagregator.azurewebsites.net/api/account/login");
+                requete.Method = "POST";
+                requete.ContentType = "application/x-www-form-urlencoded";
+
+                requete.BeginGetRequestStream(DebutReponse, requete);
             }
         }
+
+        #region Post Requete handling
+
+        private void DebutReponse(IAsyncResult resultatAsynchrone)
+        {
+            HttpWebRequest requete = (HttpWebRequest)resultatAsynchrone.AsyncState;
+            if (requete != null)
+            {
+                try
+                {
+                    Dispatcher.BeginInvoke(() =>
+                    {
+
+                        Stream postStream = requete.EndGetRequestStream(resultatAsynchrone);
+                        string postData = string.Format("Email={0}&Password={1}", user.login, user.password);
+
+                        byte[] tableau = Encoding.UTF8.GetBytes(postData);
+                        postStream.Write(tableau, 0, postData.Length);
+                        postStream.Close();
+                        requete.BeginGetResponse(FinReponse, requete);
+                    });
+                }
+                catch (WebException ex)
+                {
+                    Dispatcher.BeginInvoke(() => MessageBox.Show(ex.Message));
+                }
+            }
+        }
+
+        private void FinReponse(IAsyncResult resultatAsynchrone)
+        {
+            HttpWebRequest requete = (HttpWebRequest)resultatAsynchrone.AsyncState;
+
+            if (requete != null)
+            {
+                try
+                {
+                    WebResponse webResponse = requete.EndGetResponse(resultatAsynchrone);
+                    Stream stream = webResponse.GetResponseStream();
+
+                    StreamReader streamReader = new StreamReader(stream);
+                    string reponse = streamReader.ReadToEnd();
+                    stream.Close();
+                    streamReader.Close();
+                    webResponse.Close();
+                    Dispatcher.BeginInvoke(() =>
+                    {
+                        MessageBox.Show(reponse);
+                        //await saveUserDetailAsync(); // sa plante apres 3 appel a verifier
+                        NavigationService.Navigate(new Uri("/View/MainPage.xaml", UriKind.Relative));
+                    });
+                }
+                catch (WebException ex)
+                {
+                    Dispatcher.BeginInvoke(() => MessageBox.Show(ex.Message));
+
+                }
+
+            }
+        }
+
+        #endregion
+
+        #region Create account
+
         private void Create_Account_Click(object sender, RoutedEventArgs e)
         {
             NavigationService.Navigate(new Uri("/View/Auth/CreateAccount.xaml", UriKind.Relative));
         }
+
+        #endregion
     }
 }

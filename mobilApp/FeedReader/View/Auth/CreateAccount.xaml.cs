@@ -28,14 +28,9 @@ namespace FeedReader.View.Auth
         {
             HttpWebRequest requete = (HttpWebRequest)HttpWebRequest.Create("http://rssfeedagregator.azurewebsites.net/api/account/register");
             requete.Method = "POST";
-            requete.ContentType = "application/json";
-
+            requete.ContentType = "application/x-www-form-urlencoded";
 
             requete.BeginGetRequestStream(DebutReponse, requete);
-
-            //emailTextBox.Text;
-            //confirmPaswordTextBox.text;
-            ////paswordTextBox.text;
         }
 
         private void DebutReponse(IAsyncResult resultatAsynchrone)
@@ -49,9 +44,9 @@ namespace FeedReader.View.Auth
                     {
 
                         Stream postStream = requete.EndGetRequestStream(resultatAsynchrone);
-                        //string postData = string.Format("Email=%s&Password=%s&ConfirmPassword=%s", this.emailTextBox.Text, this.paswordTextBox.Text, this.confirmPaswordTextBox.Text);
-                        string postData = string.Format("Email=lole@lol.com&Password=tototo&ConfirmPassword=tototo");
-                        //string postData = string.Format("Email=lole@lol.com&Password=tototo");
+                        string postData = string.Format("Email={0}&Password={1}&ConfirmPassword={2}", this.emailTextBox.Text, this.paswordTextBox.Text, this.confirmPaswordTextBox.Text);
+                        //string postData = string.Format("Email=lole@lol.com&Password=tototo&ConfirmPassword=tototo");
+                        //string postData = string.Format("Email=test@test.com&Password=testes");
 
                         byte[] tableau = Encoding.UTF8.GetBytes(postData);
                         postStream.Write(tableau, 0, postData.Length);
