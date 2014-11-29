@@ -14,6 +14,7 @@ using Windows.Storage.Streams;
 using System.Runtime.Serialization;
 using System.Runtime.InteropServices.WindowsRuntime;
 using System.Text;
+using Newtonsoft.Json.Linq;
 
 namespace FeedReader
 {
@@ -89,17 +90,19 @@ namespace FeedReader
 
         private void Connection_Click(object sender, RoutedEventArgs e)
         {
-            if (checkLogInPassword())
-            {
-                user.login = loginBox.Text;
-                user.password = passwordBox.Password;
+            //    if (checkLogInPassword())
+            //    {
+            user.login = loginBox.Text;
+            user.password = passwordBox.Password;
 
-                HttpWebRequest requete = (HttpWebRequest)HttpWebRequest.Create("http://rssfeedagregator.azurewebsites.net/api/account/login");
-                requete.Method = "POST";
-                requete.ContentType = "application/x-www-form-urlencoded";
+            HttpWebRequest requete = (HttpWebRequest)HttpWebRequest.Create("http://rssfeedagregator.azurewebsites.net/api/account/login");
+            requete.Method = "POST";
+            requete.ContentType = "application/x-www-form-urlencoded";
 
-                requete.BeginGetRequestStream(DebutReponse, requete);
-            }
+            requete.BeginGetRequestStream(DebutReponse, requete);
+            //}
+            //else
+            //    MessageBox.Show("Please fill all the fields");
         }
 
         #region Post Requete handling
@@ -115,7 +118,8 @@ namespace FeedReader
                     {
 
                         Stream postStream = requete.EndGetRequestStream(resultatAsynchrone);
-                        string postData = string.Format("Email={0}&Password={1}", user.login, user.password);
+                        //string postData = string.Format("Email={0}&Password={1}", user.login, user.password);
+                        string postData = string.Format("Email=test@test.com&Password=testes");
 
                         byte[] tableau = Encoding.UTF8.GetBytes(postData);
                         postStream.Write(tableau, 0, postData.Length);
@@ -140,26 +144,59 @@ namespace FeedReader
                 {
                     WebResponse webResponse = requete.EndGetResponse(resultatAsynchrone);
                     Stream stream = webResponse.GetResponseStream();
-
                     StreamReader streamReader = new StreamReader(stream);
                     string reponse = streamReader.ReadToEnd();
+
                     stream.Close();
                     streamReader.Close();
                     webResponse.Close();
                     Dispatcher.BeginInvoke(() =>
                     {
-                        MessageBox.Show(reponse);
+                        user.token = reponse.Replace("\"", "");
                         //await saveUserDetailAsync(); // sa plante apres 3 appel a verifier
+
+                        PhoneApplicationService.Current.State["User"] = user;
                         NavigationService.Navigate(new Uri("/View/MainPage.xaml", UriKind.Relative));
                     });
                 }
                 catch (WebException ex)
                 {
-                    Dispatcher.BeginInvoke(() => MessageBox.Show(ex.Message));
+                    string reponse = null;
+                    StreamReader sr = new StreamReader(ex.Response.GetResponseStream(), true);
 
+                    if (sr != null)
+                        reponse = sr.ReadToEnd();
+
+                    if (reponse != null && reponse != "")
+                        showJsonError(reponse);
+                    else
+                        Dispatcher.BeginInvoke(() => MessageBox.Show(ex.Message));
                 }
 
             }
+        }
+
+        private void showJsonError(string reponse)
+        {
+            string errorString = "";
+            JObject json = (JObject)JObject.Parse(reponse);
+
+            if (json["ModelState"] != null)
+            {
+                if (json["ModelState"]["model.Email"] != null)
+                {
+                    errorString = (string)json["ModelState"]["model.Email"][0];
+                }
+                if (json["ModelState"]["model.Password"] != null)
+                {
+                    errorString += "\n" + (string)json["ModelState"]["model.Password"][0];
+                }
+            }
+            else if (json["Message"] != null)
+                errorString = (string)json["Message"];
+            else
+                errorString = "An error occur while log in please try again.";
+            Dispatcher.BeginInvoke(() => MessageBox.Show(errorString));
         }
 
         #endregion

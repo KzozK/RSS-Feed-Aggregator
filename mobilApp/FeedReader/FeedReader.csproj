@@ -91,10 +91,10 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Compile Include="Controller\ApiRequest.cs" />
     <Compile Include="App.xaml.cs">
       <DependentUpon>App.xaml</DependentUpon>
     </Compile>
-    <Compile Include="CategoryKeyGroup.cs" />
     <Compile Include="LocalizedStrings.cs" />
     <Compile Include="Model\AccountBindingModels.cs" />
     <Compile Include="Model\AccountViewModels.cs" />
@@ -105,6 +105,9 @@
     </Compile>
     <Compile Include="View\Auth\Login.xaml.cs">
       <DependentUpon>Login.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="View\FeedDetailPage.xaml.cs">
+      <DependentUpon>FeedDetailPage.xaml</DependentUpon>
     </Compile>
     <Compile Include="View\MainPage.xaml.cs">
       <DependentUpon>MainPage.xaml</DependentUpon>
@@ -127,6 +130,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="View\Auth\Login.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="View\FeedDetailPage.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -176,6 +183,9 @@
   </ItemGroup>
   <ItemGroup>
     <Reference Include="Microsoft.Expression.Drawing" />
+    <Reference Include="Newtonsoft.Json">
+      <HintPath>..\packages\Newtonsoft.Json.6.0.6\lib\portable-net40+sl5+wp80+win8+wpa81\Newtonsoft.Json.dll</HintPath>
+    </Reference>
     <Reference Include="SlideView.Library">
       <HintPath>..\packages\SlideView.1.4.2\lib\wp8\SlideView.Library.dll</HintPath>
     </Reference>
@@ -183,7 +193,9 @@
       <HintPath>..\..\..\..\..\..\..\Program Files (x86)\Microsoft SDKs\Silverlight\v4.0\Libraries\Client\System.ServiceModel.Syndication.dll</HintPath>
     </Reference>
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <WCFMetadata Include="Service References\" />
+  </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath)\Microsoft\$(TargetFrameworkIdentifier)\$(TargetFrameworkVersion)\Microsoft.$(TargetFrameworkIdentifier).$(TargetFrameworkVersion).Overrides.targets" />
   <Import Project="$(MSBuildExtensionsPath)\Microsoft\$(TargetFrameworkIdentifier)\$(TargetFrameworkVersion)\Microsoft.$(TargetFrameworkIdentifier).CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it.

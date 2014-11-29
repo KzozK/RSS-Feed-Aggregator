@@ -57,3 +57,6 @@ C:\Users\omer\Documents\GitHub\RSS-Feed-Aggregator\mobilApp\FeedReader\Bin\Debug
 C:\Users\omer\Documents\GitHub\RSS-Feed-Aggregator\mobilApp\FeedReader\Bin\Debug\ru\System.ServiceModel.Syndication.resources.dll
 C:\Users\omer\Documents\GitHub\RSS-Feed-Aggregator\mobilApp\FeedReader\Bin\Debug\zh-Hans\System.ServiceModel.Syndication.resources.dll
 C:\Users\omer\Documents\GitHub\RSS-Feed-Aggregator\mobilApp\FeedReader\Bin\Debug\zh-Hant\System.ServiceModel.Syndication.resources.dll
+C:\Users\omer\Documents\GitHub\RSS-Feed-Aggregator\mobilApp\FeedReader\Bin\Debug\Newtonsoft.Json.dll
+C:\Users\omer\Documents\GitHub\RSS-Feed-Aggregator\mobilApp\FeedReader\Bin\Debug\Newtonsoft.Json.xml
+C:\Users\omer\Documents\GitHub\RSS-Feed-Aggregator\mobilApp\FeedReader\obj\Debug\View\FeedDetailPage.g.cs

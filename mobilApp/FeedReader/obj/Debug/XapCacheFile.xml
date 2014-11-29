@@ -1,5 +1,5 @@
-﻿<xapCache source="C:\Users\omer\Documents\GitHub\RSS-Feed-Aggregator\mobilApp\FeedReader\Bin\Debug\FeedReader_Debug_AnyCPU.xap" wasSigned="False" wasTritonized="False" certificateThumbprint="" TimeStampUrl="" signKeyFile="" signKeyPassword="" lastWriteTime="28/11/2014 21:25:45">
-  <file source="C:\Users\omer\Documents\GitHub\RSS-Feed-Aggregator\mobilApp\FeedReader\obj\Debug\FeedReader.dll" archivePath="FeedReader.dll" lastWriteTime="28/11/2014 21:25:45" />
+﻿<xapCache source="C:\Users\omer\Documents\GitHub\RSS-Feed-Aggregator\mobilApp\FeedReader\Bin\Debug\FeedReader_Debug_AnyCPU.xap" wasSigned="False" wasTritonized="False" certificateThumbprint="" TimeStampUrl="" signKeyFile="" signKeyPassword="" lastWriteTime="29/11/2014 20:11:25">
+  <file source="C:\Users\omer\Documents\GitHub\RSS-Feed-Aggregator\mobilApp\FeedReader\obj\Debug\FeedReader.dll" archivePath="FeedReader.dll" lastWriteTime="29/11/2014 20:11:24" />
   <file source="C:\Users\omer\Documents\GitHub\RSS-Feed-Aggregator\mobilApp\FeedReader\Assets\AlignmentGrid.png" archivePath="Assets\AlignmentGrid.png" lastWriteTime="14/11/2014 11:21:09" />
   <file source="C:\Users\omer\Documents\GitHub\RSS-Feed-Aggregator\mobilApp\FeedReader\Assets\Images\green.png" archivePath="Assets\Images\green.png" lastWriteTime="20/11/2014 10:57:22" />
   <file source="C:\Users\omer\Documents\GitHub\RSS-Feed-Aggregator\mobilApp\FeedReader\Assets\Images\red.png" archivePath="Assets\Images\red.png" lastWriteTime="20/11/2014 10:57:22" />
@@ -8,12 +8,14 @@
   <file source="C:\Users\omer\Documents\GitHub\RSS-Feed-Aggregator\mobilApp\FeedReader\Assets\Tiles\FlipCycleTileSmall.png" archivePath="Assets\Tiles\FlipCycleTileSmall.png" lastWriteTime="14/11/2014 11:21:09" />
   <file source="C:\Users\omer\Documents\GitHub\RSS-Feed-Aggregator\mobilApp\FeedReader\Assets\Tiles\IconicTileMediumLarge.png" archivePath="Assets\Tiles\IconicTileMediumLarge.png" lastWriteTime="14/11/2014 11:21:09" />
   <file source="C:\Users\omer\Documents\GitHub\RSS-Feed-Aggregator\mobilApp\FeedReader\Assets\Tiles\IconicTileSmall.png" archivePath="Assets\Tiles\IconicTileSmall.png" lastWriteTime="14/11/2014 11:21:09" />
-  <file source="C:\Users\omer\Documents\GitHub\RSS-Feed-Aggregator\mobilApp\FeedReader\Bin\Debug\AppManifest.xaml" archivePath="AppManifest.xaml" lastWriteTime="27/11/2014 17:21:33" />
+  <file source="C:\Users\omer\Documents\GitHub\RSS-Feed-Aggregator\mobilApp\FeedReader\Bin\Debug\AppManifest.xaml" archivePath="AppManifest.xaml" lastWriteTime="29/11/2014 10:40:59" />
   <file source="C:\Users\omer\Documents\GitHub\RSS-Feed-Aggregator\mobilApp\FeedReader\Bin\Debug\Assets\ApplicationIcon.png" archivePath="Assets\ApplicationIcon.png" lastWriteTime="14/11/2014 11:21:09" />
   <file source="C:\Users\omer\Documents\GitHub\RSS-Feed-Aggregator\mobilApp\FeedReader\Bin\Debug\Assets\Tiles\FlipCycleTileMedium.png" archivePath="Assets\Tiles\FlipCycleTileMedium.png" lastWriteTime="14/11/2014 11:21:09" />
   <file source="C:\Program Files (x86)\Microsoft SDKs\Expression\Blend\Windows Phone\v8.0\Libraries\Microsoft.Expression.Drawing.dll" archivePath="Microsoft.Expression.Drawing.dll" lastWriteTime="25/09/2012 01:41:02" />
+  <file source="C:\Users\omer\Documents\GitHub\RSS-Feed-Aggregator\mobilApp\packages\Newtonsoft.Json.6.0.6\lib\portable-net40+sl5+wp80+win8+wpa81\Newtonsoft.Json.dll" archivePath="Newtonsoft.Json.dll" lastWriteTime="29/11/2014 10:32:27" />
   <file source="C:\Users\omer\Documents\GitHub\RSS-Feed-Aggregator\mobilApp\packages\SlideView.1.4.2\lib\wp8\SlideView.Library.dll" archivePath="SlideView.Library.dll" lastWriteTime="14/11/2014 11:28:29" />
   <file source="C:\Program Files (x86)\Microsoft SDKs\Silverlight\v4.0\Libraries\Client\System.ServiceModel.Syndication.dll" archivePath="System.ServiceModel.Syndication.dll" lastWriteTime="09/03/2011 23:08:16" />
+  <file source="C:\Users\omer\Documents\GitHub\RSS-Feed-Aggregator\mobilApp\packages\Newtonsoft.Json.6.0.6\lib\portable-net40+sl5+wp80+win8+wpa81\Newtonsoft.Json.xml" archivePath="Newtonsoft.Json.xml" lastWriteTime="29/11/2014 10:32:27" />
   <file source="C:\Program Files (x86)\Microsoft SDKs\Silverlight\v4.0\Libraries\Client\System.ServiceModel.Syndication.xml" archivePath="System.ServiceModel.Syndication.xml" lastWriteTime="26/02/2010 00:01:10" />
   <file source="C:\Users\omer\Documents\GitHub\RSS-Feed-Aggregator\mobilApp\FeedReader\Bin\Debug\Properties\WMAppManifest.xml" archivePath="WMAppManifest.xml" lastWriteTime="27/11/2014 11:12:57" />
 </xapCache>

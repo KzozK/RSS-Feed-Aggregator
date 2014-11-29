@@ -12,7 +12,7 @@ namespace FeedReader.Model
 
         public string   URL { get; set; }
 
-        public string   Flux { get; set; }
+        public string   Name { get; set; }
 
         public int      CategoryId { get; set; }
         
