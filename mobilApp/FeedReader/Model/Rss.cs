@@ -3,26 +3,66 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Windows.Media.Imaging;
 using System.ServiceModel.Syndication;
+using System.ComponentModel;
 
 namespace FeedReader.Model
 {
-    public class RSS
+    public class RSS : INotification
     {
-        public int      Id { get; set; }
+        private int id;
+        public int Id
+        {
+            get { return id; }
+            set { SetField(ref id, value); }
+        }
 
-        public string   URL { get; set; }
+        private string url;
+        public string URL
+        {
+            get { return url; }
+            set { SetField(ref url, value); }
+        }
 
-        public string   Name { get; set; }
+        private string name;
+        public string Name
+        {
+            get { return name; }
+            set { SetField(ref name, value); }
+        }
 
-        public int      CategoryId { get; set; }
-        
-        public int   UserId { get; set; }
+        private int categoryId;
+        public int CategoryId
+        {
+            get { return categoryId; }
+            set { SetField(ref categoryId, value); }
+        }
 
-        public BitmapImage image { get; set; }
+        private int userId;
+        public int UserId
+        {
+            get { return userId; }
+            set { SetField(ref userId, value); }
+        }
 
-        public int numberOfFeed { get; set; }
+        private BitmapImage img;
+        public BitmapImage image
+                {
+            get { return img; }
+            set { SetField(ref img, value); }
+        }
 
-        public SyndicationFeed newsListe { get; set; }
+        private int nbOfFeed;
+        public int numberOfFeed
+        {
+            get { return nbOfFeed; }
+            set { SetField(ref nbOfFeed, value); }
+        }
+        private SyndicationFeed newsliste;
+        public SyndicationFeed newsListe
+        {
+            get { return newsliste; }
+            set { SetField(ref newsliste, value); }
+        }
 
     }
 }

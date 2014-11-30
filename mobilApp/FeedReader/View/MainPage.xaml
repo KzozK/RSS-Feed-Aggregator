@@ -8,6 +8,7 @@
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     xmlns:controls="clr-namespace:Microsoft.Phone.Controls;assembly=Microsoft.Phone"
     xmlns:library="clr-namespace:SlideView.Library;assembly=SlideView.Library"
+    xmlns:toolkit="clr-namespace:Microsoft.Phone.Controls;assembly=Microsoft.Phone.Controls.Toolkit"
     mc:Ignorable="d"
     FontFamily="{StaticResource PhoneFontFamilyNormal}"
     FontSize="{StaticResource PhoneFontSizeNormal}"
@@ -17,13 +18,12 @@
 
     <!--LayoutRoot is the root grid where all page content is placed-->
     <Grid x:Name="LayoutRoot" Background="Transparent">
-
         <library:SlideView x:Name="SliderView" SelectionChanged="SlideView_OnSelectionChanged" Grid.RowSpan="2"  >
+
+            <!-- Category VIEW-->
             <Grid x:Name="leftView" Background="#FF393939" Width="400" Margin="0,0,0,0">
 
-
-                <phone:LongListSelector Name="CategoryLLS" Margin="10,142,10,158" SelectionChanged="CategoryLLS_SelectionChanged">
-
+                <phone:LongListSelector x:Name="CategoryLLS" Margin="10,114,10,158" SelectionChanged="CategoryLLS_SelectionChanged">
                     <phone:LongListSelector.ItemTemplate>
                         <DataTemplate>
                             <StackPanel Orientation="Vertical">
@@ -45,21 +45,13 @@
                     </phone:LongListSelector.ItemTemplate>
 
                 </phone:LongListSelector>
-
-
-
-
-                <Image HorizontalAlignment="Left" Height="100" Margin="50,37,0,0" VerticalAlignment="Top" Width="300" Source="/Assets/Tiles/IconicTileMediumLarge.png"/>
-                <Button x:Name="addFeedButton" HorizontalAlignment="Left" Margin="50,647,0,0" VerticalAlignment="Top" Width="300" Background="#FF0EA16C" Foreground="Black" BorderBrush="#FF0EA16C" FontSize="26.667" FontWeight="Bold" FontFamily="Arial">
-                    <StackPanel Orientation="Horizontal">
-                        <Image Source="Assets/Images/rss64x.png" Stretch="Uniform" Width="30" Height="30" Margin="0,0,20,0" />
-                        <TextBlock Text="Add a new feed" />
-                    </StackPanel>
-                </Button>
-                <Button Content="Settings" HorizontalAlignment="Left" Margin="50,721,0,0" VerticalAlignment="Top" Width="300" Background="#FF0EA16C" BorderBrush="#FF0EA16C" Foreground="Black" FontFamily="Arial" FontSize="26.667" FontWeight="Bold"/>
+                <Button Content="Manage Feed" x:Name="addFeedButton" Click="manageFeedButton_Click" HorizontalAlignment="Left" Margin="50,647,0,0" VerticalAlignment="Top" Width="300" Background="#FF0EA16C" Foreground="Black" BorderBrush="#FF0EA16C" FontSize="26.667" FontWeight="Bold" FontFamily="Arial"/>
+                <Button Content="Manage category" HorizontalAlignment="Left" VerticalAlignment="Top" Width="300" Background="#FF0EA16C" BorderBrush="#FF0EA16C" Foreground="Black" FontFamily="Arial" FontSize="26.667" FontWeight="Bold" Margin="50,718,0,0" Click="manageCategoryButton_Click"/>
+                <Button Content="Account" HorizontalAlignment="Left" Margin="50,37,0,0" VerticalAlignment="Top" Width="300" Background="#FF0EA16C" BorderBrush="#FF0EA16C" Foreground="Black" FontFamily="Arial" FontSize="26.667" FontWeight="Bold" Click="Button_Click" />
 
             </Grid>
 
+            <!-- MAIN VIEW-->
             <Grid Background="GhostWhite">
                 <Grid.RowDefinitions>
                     <RowDefinition Height="Auto"/>
@@ -84,38 +76,49 @@
             </Grid>
         </library:SlideView>
 
-        <!-- LOCALIZATION NOTE:
-            To localize the displayed strings copy their values to appropriately named
-            keys in the app's neutral language resource file (AppResources.resx) then
-            replace the hard-coded text value between the attributes' quotation marks
-            with the binding clause whose path points to that string name.
-
-            For example:
-
-                Text="{Binding Path=LocalizedResources.ApplicationTitle, Source={StaticResource LocalizedStrings}}"
-
-            This binding points to the template's string resource named "ApplicationTitle".
-
-            Adding supported languages in the Project Properties tab will create a
-            new resx file per language that can carry the translated values of your
-            UI strings. The binding in these examples will cause the value of the
-            attributes to be drawn from the .resx file that matches the
-            CurrentUICulture of the app at run time.
-         -->
-
-        <!--
-        <Grid x:Name="ContentPanel" Grid.Row="2" Margin="12,0,12,0" Background="Blue">
-
-        </Grid> -->
 
 
-        <!--Uncomment to see an alignment grid to help ensure your controls are
-            aligned on common boundaries.  The image has a top margin of -32px to
-            account for the System Tray. Set this to 0 (or remove the margin altogether)
-            if the System Tray is hidden.
+        <Grid x:Name="MaskGrid" Background="Black" Opacity="0.7" Visibility="Collapsed" />
+        
+        <!--MANAGE RSS-->
+        <Grid x:Name="rssFeedManageGrid" Background="Black" Margin="10,10,10,10" Visibility="Collapsed">
+            <StackPanel VerticalAlignment="Center">
+                <TextBlock Text="MANAGE YOUR CATEGORY" FontSize="30" TextAlignment="Center" TextWrapping="Wrap" Margin="0 0 0 20" />
+                <TextBlock Text="Choose a category" TextWrapping="Wrap" />
+                <toolkit:ListPicker x:Name="categorylistPickerForRss" ExpansionMode="ExpansionAllowed" SelectionChanged="categorylistPickerForRss_SelectionChanged"/>
 
-            Before shipping remove this XAML and the image itself.-->
-        <!--<Image Source="/Assets/AlignmentGrid.png" VerticalAlignment="Top" Height="800" Width="480" Margin="0,-32,0,0" Grid.Row="0" Grid.RowSpan="2" IsHitTestVisible="False" />-->
+                <TextBlock Text="Name of your feed or the new name of the one you selected to change" TextWrapping="Wrap" />
+                <TextBox x:Name="rssFeedNameBox" />
+                <TextBlock Text="url of your feed (leave empty if no change)" TextWrapping="Wrap" />
+                <TextBox x:Name="rssFeedURLBox" />
+                <Button Content="Create this feed" Foreground="Green" Width="300" Click="createRssFeedButton_Click"/>
+
+                <TextBlock Text="Select a feed To delete or to change it name" />
+                <toolkit:ListPicker x:Name="rssFeedManageGridlistPicker" ExpansionMode="ExpansionAllowed" />
+                <Button Content="Delete this feed" Foreground="Red" Width="300" Click="deleteRssFeedButton_Click"/>
+                <Button Content="Change feed name" Foreground="Orange" Width="300" Click="modifyRssFeedButton_Click"/>
+                <Button Content="Close" Foreground="White" Width="300" Click="manageFeedButton_Click"/>
+
+            </StackPanel>
+        </Grid>
+
+        <!--MANAGE CAtEGORY-->
+        <Grid x:Name="categoryManagerGrid" Background="Black" Margin="10,100,10,100" Visibility="Collapsed">
+            <StackPanel VerticalAlignment="Center">
+                <TextBlock Text="Create a new category or change name of selected category" TextWrapping="Wrap" />
+                <TextBox x:Name="catNameBox" />
+                <Button Content="Create this category" Foreground="Green" Width="300" Click="createCategoryButton_Click"/>
+
+                <TextBlock Text="Select a cateogory To delete or to change name" />
+                <toolkit:ListPicker x:Name="categoryManageGridlistPicker" ExpansionMode="ExpansionAllowed" />
+                <Button Content="Delete this category" Foreground="Red" Width="300" Click="deleteCategoryButton_Click"/>
+                <Button Content="Change category name" Foreground="Orange" Width="300" Click="modifyCategoryButton_Click"/>
+                <Button Content="Close" Foreground="White" Width="300" Click="manageCategoryButton_Click"/>
+
+            </StackPanel>
+        </Grid>
     </Grid>
+
+
 
 </phone:PhoneApplicationPage>

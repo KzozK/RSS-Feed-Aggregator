@@ -8,6 +8,7 @@ using System.Windows.Navigation;
 using Microsoft.Phone.Controls;
 using Microsoft.Phone.Shell;
 using System.ServiceModel.Syndication;
+using System.Windows.Media.Imaging;
 
 namespace FeedReader.View
 {
@@ -31,6 +32,9 @@ namespace FeedReader.View
                 this.dateTextBlock.Text = feed.PublishDate.Date.ToString();
             if (feed.Summary != null)
                 this.descTextBlock.Text = feed.Summary.Text;
+            // image dans Summary faire webview 
+            //feedImage.Source = new BitmapImage(new Uri(feed.BaseUri.AbsolutePath, UriKind.Absolute));
+
             base.OnNavigatedTo(e);
         }
     }

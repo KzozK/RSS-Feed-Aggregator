@@ -23,15 +23,29 @@ using System.Collections;
 using Newtonsoft.Json.Linq;
 using Newtonsoft.Json;
 using System.Text;
+using System.Collections.ObjectModel;
+using System.ComponentModel;
 
 namespace FeedReader
 {
+
     public partial class MainPage : PhoneApplicationPage
     {
-        private string categoriesUrl = "http://rssfeedagregator.azurewebsites.net/api/categories/categories";
-        private string rssUrl = "http://rssfeedagregator.azurewebsites.net/api/rss/rss";
+        // DEFINE
+        private string getAllCategoriesUrl = "http://rssfeedagregator.azurewebsites.net/api/categories/categories";
+        private string categoriesManagingUrl = "http://rssfeedagregator.azurewebsites.net/api/categories";
+        private string getAllRssUrl = "http://rssfeedagregator.azurewebsites.net/api/rss/rss";
+        private string rssManagingUrl = "http://rssfeedagregator.azurewebsites.net/api/rss";
+        private string createAction = "POST";
+        private string deleteAction = "DELETE";
+        private string modifAction = "PUT";
 
-        IEnumerable<Category> categoryList = new List<Category>();
+        //Category & rss managing property
+        private string action = "";
+        private Category selectedCategory = null;
+        private RSS selectedRssFeed = null;
+
+        ObservableCollection<Category> categoryList = new ObservableCollection<Category>();
         int downloadingCategoryId = 0;
         int selectedFeedIndex = 0;
         UserDetail user = new UserDetail();
@@ -42,7 +56,9 @@ namespace FeedReader
         {
             InitializeComponent();
             SliderView.SelectedIndex = 1;
-            this.getDataFromUrl(this.categoriesUrl);
+            this.action = this.createAction;
+            this.CategoryLLS.ItemsSource = this.categoryList;
+            this.getDataFromUrl(this.getAllCategoriesUrl);
         }
 
         protected override void OnNavigatedTo(NavigationEventArgs e)
@@ -53,6 +69,48 @@ namespace FeedReader
         private void SlideView_OnSelectionChanged(object sender, EventArgs e)
         {
         }
+
+        #region Search Func
+
+        private Category findCategoryByName(string name)
+        {
+            return this.categoryList.First<Category>(cat => cat.Name == name);
+        }
+        private Category findCategoryById(int id)
+        {
+            return this.categoryList.First<Category>(cat => cat.Id == id);
+        }
+
+        private RSS findFeedInCategoryByName(Category cat, string name)
+        {
+            return cat.rssFeedList.First(rss => rss.Name == name);
+        }
+
+        private static int categoryIndexForId(ObservableCollection<Category> source, int id)
+        {
+            int index = 0;
+            foreach (Category item in source)
+            {
+                if (item.Id == id)
+                    return index;
+                index++;
+            }
+            return -1;
+        }
+
+        private static int feedIndexForId(ObservableCollection<RSS> source, int id)
+        {
+            int index = 0;
+            foreach (RSS item in source)
+            {
+                if (item.Id == id)
+                    return index;
+                index++;
+            }
+            return -1;
+        }
+
+        #endregion
 
         #region FEED VIEW
 
@@ -76,6 +134,143 @@ namespace FeedReader
 
         #endregion
 
+        #region MANAGE CATEGORY
+
+        private void manageCategoryButton_Click(object sender, RoutedEventArgs e)
+        {
+            Visibility visibilityParam = (this.categoryManagerGrid.Visibility == Visibility.Collapsed ? Visibility.Visible : Visibility.Collapsed);
+            this.MaskGrid.Visibility = visibilityParam;
+            this.categoryManagerGrid.Visibility = visibilityParam;
+            this.categoryManageGridlistPicker.ItemsSource = this.categoryList.Select(cat => cat.Name).ToList<string>();
+            this.catNameBox.Text = "";
+            this.action = "";
+            this.selectedCategory = null;
+        }
+
+        private void createCategoryButton_Click(object sender, RoutedEventArgs e)
+        {
+            if (this.catNameBox.Text == "")
+            {
+                MessageBox.Show("Please write a name");
+                return ;
+            }
+            this.selectedCategory = new Category() { Name = this.catNameBox.Text, Id = 0};
+            this.action = this.createAction;
+
+            this.getDataFromUrl(this.categoriesManagingUrl);
+        }
+        private void modifyCategoryButton_Click(object sender, RoutedEventArgs e)
+        {
+            if (this.categoryList.Count == 0)
+            {
+                MessageBox.Show("There is no category to Modify.");
+                return;
+            }
+            if (this.catNameBox.Text == "")
+            {
+                MessageBox.Show("Please write the new name");
+                return;
+            }
+            this.action = this.modifAction;
+            this.selectedCategory = findCategoryByName((string)this.categoryManageGridlistPicker.SelectedItem);
+            this.selectedCategory.Name = this.catNameBox.Text;
+
+            this.getDataFromUrl(this.categoriesManagingUrl);
+        }
+        private void deleteCategoryButton_Click(object sender, RoutedEventArgs e)
+        {
+            if (this.categoryList.Count == 0)
+            {
+                MessageBox.Show("There is no category to delete.");
+                return;
+            }
+            this.action = this.deleteAction;
+            this.selectedCategory = findCategoryByName((string)this.categoryManageGridlistPicker.SelectedItem);
+
+            this.getDataFromUrl(this.categoriesManagingUrl);
+        }
+
+        #endregion
+
+        #region MANAGE FEED
+
+
+        private void manageFeedButton_Click(object sender, RoutedEventArgs e)
+        {
+            if (this.categoryList.Count == 0)
+                return;
+            Visibility visibilityParam = (this.rssFeedManageGrid.Visibility == Visibility.Collapsed ? Visibility.Visible : Visibility.Collapsed);
+            this.MaskGrid.Visibility = visibilityParam;
+            this.rssFeedManageGrid.Visibility = visibilityParam;
+            this.categorylistPickerForRss.ItemsSource = this.categoryList.Select(cat => cat.Name).ToList<string>();
+            this.rssFeedNameBox.Text = "";
+            this.rssFeedURLBox.Text = "";
+            this.selectedRssFeed = null;
+            this.action = "";
+            Category selectedCat = findCategoryByName((string)this.categorylistPickerForRss.SelectedItem);
+            this.rssFeedManageGridlistPicker.ItemsSource = selectedCat.rssFeedList.Select(rss => rss.Name);
+        }
+
+        private void categorylistPickerForRss_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            Category selectedCat = findCategoryByName((string)this.categorylistPickerForRss.SelectedItem);
+            this.rssFeedManageGridlistPicker.ItemsSource = selectedCat.rssFeedList.Select(rss => rss.Name);
+        }
+
+        private void createRssFeedButton_Click(object sender, RoutedEventArgs e)
+        {
+            if (this.rssFeedNameBox.Text == "" || this.rssFeedURLBox.Text == "")
+            {
+                MessageBox.Show("Please fill all field");
+                return;
+            }
+            this.selectedRssFeed = new RSS();
+            this.selectedRssFeed.Id = 0;
+            this.selectedRssFeed.CategoryId = findCategoryByName((string)this.categorylistPickerForRss.SelectedItem).Id;
+            this.selectedRssFeed.Name = this.rssFeedNameBox.Text;
+            this.selectedRssFeed.URL = this.rssFeedURLBox.Text;
+            this.action = this.createAction;
+
+            this.getDataFromUrl(this.rssManagingUrl);
+        }
+        private void modifyRssFeedButton_Click(object sender, RoutedEventArgs e)
+        {
+            if (this.rssFeedManageGridlistPicker.Items.Count == 0)
+            {
+                MessageBox.Show("There is no feed to modify.");
+                return;
+            }
+            if (this.rssFeedNameBox.Text == "" && this.rssFeedURLBox.Text == "")
+            {
+                MessageBox.Show("Please fill the Name or/and Url field");
+                return;
+            }
+
+            Category cat = findCategoryByName((string)this.categorylistPickerForRss.SelectedItem);
+            this.selectedRssFeed = findFeedInCategoryByName(cat, (string)this.rssFeedManageGridlistPicker.SelectedItem);
+            this.selectedRssFeed.Name = (this.rssFeedNameBox.Text != "") ? this.rssFeedNameBox.Text : this.selectedRssFeed.Name;
+            this.selectedRssFeed.URL = (this.rssFeedURLBox.Text != "") ? this.rssFeedURLBox.Text : this.selectedRssFeed.URL;
+            this.action = this.modifAction;
+
+            this.getDataFromUrl(this.rssManagingUrl);
+        }
+        private void deleteRssFeedButton_Click(object sender, RoutedEventArgs e)
+        {
+            if (this.rssFeedManageGridlistPicker.Items.Count == 0)
+            {
+                MessageBox.Show("There is no feed to delete.");
+                return;
+            }
+            this.action = this.deleteAction;
+            Category cat = findCategoryByName((string)this.categorylistPickerForRss.SelectedItem);
+            this.selectedRssFeed = findFeedInCategoryByName(cat, (string)this.rssFeedManageGridlistPicker.SelectedItem);
+            this.action = this.deleteAction;
+
+            this.getDataFromUrl(this.rssManagingUrl);
+        }
+
+        #endregion
+
         #region LongListSelector
 
         private void CategoryLLS_SelectionChanged(object sender, SelectionChangedEventArgs e)
@@ -95,6 +290,8 @@ namespace FeedReader
             NavigationService.Navigate(new Uri("/View/FeedDetailPage.xaml", UriKind.Relative));
         }
         #endregion
+
+
         #endregion
     }
 }
