@@ -99,6 +99,9 @@
     <Compile Include="Model\Category.cs" />
     <Compile Include="Model\Rss.cs" />
     <Compile Include="Controller\INotification.cs" />
+    <Compile Include="View\AccountSettingPage.xaml.cs">
+      <DependentUpon>AccountSettingPage.xaml</DependentUpon>
+    </Compile>
     <Compile Include="View\Auth\CreateAccount.xaml.cs">
       <DependentUpon>CreateAccount.xaml</DependentUpon>
     </Compile>
@@ -124,6 +127,10 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </ApplicationDefinition>
+    <Page Include="View\AccountSettingPage.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="View\Auth\CreateAccount.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>

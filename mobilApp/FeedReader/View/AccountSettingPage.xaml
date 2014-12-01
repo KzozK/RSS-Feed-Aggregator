@@ -1,5 +1,5 @@
 ﻿<phone:PhoneApplicationPage
-    x:Class="FeedReader.View.FeedDetailPage"
+    x:Class="FeedReader.View.AccountSettingPage"
     xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
     xmlns:phone="clr-namespace:Microsoft.Phone.Controls;assembly=Microsoft.Phone"
@@ -22,18 +22,19 @@
 
         <!--TitlePanel contains the name of the application and page title-->
         <StackPanel Grid.Row="0" Margin="12,17,0,28">
-            <TextBlock Text="RSS Feed Agregator" HorizontalAlignment="Center" FontSize="30"/>
+            <TextBlock Text="Account setting" FontSize="30" TextAlignment="Center"/>
         </StackPanel>
 
         <!--ContentPanel - place additional content here-->
-        <Grid x:Name="ContentPanel" Margin="12,10" Grid.Row="1">
-
-            <StackPanel >
-                <TextBlock x:Name="titleTextBlock" TextWrapping="Wrap" TextAlignment="Left" Text="title" Margin="0 10 0 10"/>
-                <TextBlock x:Name="dateTextBlock" TextWrapping="Wrap" TextAlignment="Left" Text="Date" Margin="0 10 0 10"/>
-                <TextBlock x:Name="authorTextBlock" TextWrapping="Wrap" TextAlignment="Left" Text="Author" Margin="0 10 0 10"/>
-                <phone:WebBrowser x:Name="descWebBrowser" HorizontalAlignment="Left" Margin="10 10 0 10" VerticalAlignment="Top" Height="516" Width="436" Navigated="descWebBrowser_Navigated"/>
-                <TextBlock Height="1"/>
+        <Grid x:Name="ContentPanel" Grid.Row="1" Margin="12,0,12,0">
+            <StackPanel VerticalAlignment="Center">
+                <TextBlock Text="Change your password" TextAlignment="Center" Margin="0 0 0 30" FontSize="26"/>
+                <TextBlock Text="password"/>
+                <TextBox x:Name="paswordTextBox" />
+                <TextBlock Text="confirm password"/>
+                <TextBox x:Name="confirmPaswordTextBox" />
+                <Button x:Name="changePasswordButton" Content="Create account" Click="changePasswordButton_Click"/>
+                <Button Margin="0 60 0 0" x:Name="logout" Content="Logout" Click="logout_Click"/>
             </StackPanel>
         </Grid>
     </Grid>

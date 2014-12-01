@@ -111,3 +111,4 @@ C:\Users\omer\Documents\GitHub\RSS-Feed-Aggregator\mobilApp\FeedReader\Bin\Debug
 C:\Users\omer\Documents\GitHub\RSS-Feed-Aggregator\mobilApp\FeedReader\Bin\Debug\vi-VN\Microsoft.Phone.Controls.Toolkit.resources.dll
 C:\Users\omer\Documents\GitHub\RSS-Feed-Aggregator\mobilApp\FeedReader\Bin\Debug\zh-CN\Microsoft.Phone.Controls.Toolkit.resources.dll
 C:\Users\omer\Documents\GitHub\RSS-Feed-Aggregator\mobilApp\FeedReader\Bin\Debug\zh-TW\Microsoft.Phone.Controls.Toolkit.resources.dll
+C:\Users\omer\Documents\GitHub\RSS-Feed-Aggregator\mobilApp\FeedReader\obj\Debug\View\AccountSettingPage.g.cs

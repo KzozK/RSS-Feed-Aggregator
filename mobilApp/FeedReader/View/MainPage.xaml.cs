@@ -240,9 +240,9 @@ namespace FeedReader
                 MessageBox.Show("There is no feed to modify.");
                 return;
             }
-            if (this.rssFeedNameBox.Text == "" && this.rssFeedURLBox.Text == "")
+            if (this.rssFeedNameBox.Text == "" || this.rssFeedURLBox.Text == "")
             {
-                MessageBox.Show("Please fill the Name or/and Url field");
+                MessageBox.Show("Please fill the Name and Url field");
                 return;
             }
 
@@ -286,12 +286,21 @@ namespace FeedReader
         private void NewsListBox_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
             SyndicationItem item = (SyndicationItem)NewsListBox.SelectedItem;
+
+            if (item == null)
+                return;
             PhoneApplicationService.Current.State["FeedItem"] = item;
             NavigationService.Navigate(new Uri("/View/FeedDetailPage.xaml", UriKind.Relative));
         }
         #endregion
 
+        #endregion
 
+        #region ACCOUNT
+        private void accountButton_Click(object sender, RoutedEventArgs e)
+        {
+            NavigationService.Navigate(new Uri("/View/AccountSettingPage.xaml", UriKind.Relative));
+        }
         #endregion
     }
 }

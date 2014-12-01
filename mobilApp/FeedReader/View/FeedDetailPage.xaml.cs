@@ -20,22 +20,40 @@ namespace FeedReader.View
             InitializeComponent();
         }
 
+
         protected override void OnNavigatedTo(NavigationEventArgs e)
         {
             feed = (SyndicationItem)PhoneApplicationService.Current.State["FeedItem"];
+            if (feed == null)
+                return;
 
-            if (feed.Title != null)
-                this.titleTextBlock.Text = feed.Title.Text;
-            if (feed.Authors.Count > 0)
-                this.authorTextBlock.Text = feed.Authors.First().Name;
-            if (feed.PublishDate != null)
-                this.dateTextBlock.Text = feed.PublishDate.Date.ToString();
-            if (feed.Summary != null)
-                this.descTextBlock.Text = feed.Summary.Text;
-            // image dans Summary faire webview 
-            //feedImage.Source = new BitmapImage(new Uri(feed.BaseUri.AbsolutePath, UriKind.Absolute));
+            if (feed.Title != null) this.titleTextBlock.Text = feed.Title.Text;
+            else this.titleTextBlock.Visibility = Visibility.Collapsed;
+
+            if (feed.Authors.Count > 0) this.authorTextBlock.Text = feed.Authors.First().Name;
+            else this.authorTextBlock.Visibility = Visibility.Collapsed;
+
+            if (feed.PublishDate != null) this.dateTextBlock.Text = feed.PublishDate.Date.ToString();
+            else this.dateTextBlock.Visibility = Visibility.Collapsed;
+
+            //image
+            if (feed.Links != null)
+            {
+                this.descWebBrowser.Navigate(feed.Links.First().Uri);
+                //foreach (SyndicationLink link in feed.Links)
+                //    if (link.MediaType != null && link.MediaType.StartsWith("image"))
+                //    {
+                //        this.descWebBrowser.Navigate(feed.Links.First().Uri);//feed.Links.First().Uri);//this.descWebBrowser.NavigateToString(feed.Summary.Text);
+                //    }
+            }
+            else this.descWebBrowser.Visibility = Visibility.Collapsed;
 
             base.OnNavigatedTo(e);
         }
+
+        private void descWebBrowser_Navigated(object sender, NavigationEventArgs e)
+        {
+        }
+
     }
 }
