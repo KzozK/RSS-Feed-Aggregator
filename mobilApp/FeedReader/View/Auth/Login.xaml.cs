@@ -109,6 +109,7 @@ namespace FeedReader
 
         private void DebutReponse(IAsyncResult resultatAsynchrone)
         {
+            Dispatcher.BeginInvoke(() => this.loaderGrid.Visibility = Visibility.Visible);
             HttpWebRequest requete = (HttpWebRequest)resultatAsynchrone.AsyncState;
             if (requete != null)
             {
@@ -174,6 +175,7 @@ namespace FeedReader
                 }
 
             }
+            Dispatcher.BeginInvoke(() => this.loaderGrid.Visibility = Visibility.Collapsed);
         }
 
         private void showJsonError(string reponse)

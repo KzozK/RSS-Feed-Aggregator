@@ -22,6 +22,7 @@ namespace FeedReader
         #region Create REQUEST
         private void getDataFromUrl(string url)
         {
+            Dispatcher.BeginInvoke(() => this.loaderGrid.Visibility = Visibility.Visible);
             if (NetworkInterface.GetIsNetworkAvailable() == false)
             {
                 MessageBox.Show("You don't have internet conection please try later.");
@@ -45,17 +46,16 @@ namespace FeedReader
             }
         }
 
-
-        // get all the categories
-        private void getAllCategoryRequest(HttpWebRequest requete, IAsyncResult resultatAsynchrone)
+        // logout
+        private void createTokenRequest(HttpWebRequest requete, IAsyncResult resultatAsynchrone)
         {
             Dispatcher.BeginInvoke(() =>
             {
                 Stream postStream = requete.EndGetRequestStream(resultatAsynchrone);
                 string postData = string.Format("Token={0}", user.token);
-                byte[] tableau = Encoding.UTF8.GetBytes(postData);
 
-                postStream.Write(tableau, 0, tableau.Length);
+                byte[] tableau = Encoding.UTF8.GetBytes(postData);
+                postStream.Write(tableau, 0, postData.Length);
                 postStream.Close();
                 requete.BeginGetResponse(FinReponse, requete);
             });
@@ -67,21 +67,6 @@ namespace FeedReader
             {
                 Stream postStream = requete.EndGetRequestStream(resultatAsynchrone);
                 string postData = string.Format("Token={0}&Name={1}&Action={2}&Id={3}", user.token, this.selectedCategory.Name, this.action, this.selectedCategory.Id);
-                byte[] tableau = Encoding.UTF8.GetBytes(postData);
-
-                postStream.Write(tableau, 0, tableau.Length);
-                postStream.Close();
-                requete.BeginGetResponse(FinReponse, requete);
-            });
-        }
-
-        // get all the rss feed for all categories
-        private void getAllRssRequest(HttpWebRequest requete, IAsyncResult resultatAsynchrone)
-        {
-            Dispatcher.BeginInvoke(() =>
-            {
-                Stream postStream = requete.EndGetRequestStream(resultatAsynchrone);
-                string postData = string.Format("Token={0}", user.token);
                 byte[] tableau = Encoding.UTF8.GetBytes(postData);
 
                 postStream.Write(tableau, 0, tableau.Length);
@@ -115,10 +100,8 @@ namespace FeedReader
             {
                 try
                 {
-                    if (requete.RequestUri.AbsoluteUri == this.getAllCategoriesUrl)
-                        getAllCategoryRequest(requete, resultatAsynchrone);
-                    else if (requete.RequestUri.AbsoluteUri == this.getAllRssUrl)
-                        getAllRssRequest(requete, resultatAsynchrone);
+                    if (requete.RequestUri.AbsoluteUri == this.getAllCategoriesUrl || requete.RequestUri.AbsoluteUri == this.getAllRssUrl || requete.RequestUri.AbsoluteUri == this.logoutUrl)
+                        createTokenRequest(requete, resultatAsynchrone);
                     else if (requete.RequestUri.AbsoluteUri == this.categoriesManagingUrl)
                         createCategoryModificationRequest(requete, resultatAsynchrone);
                     else if (requete.RequestUri.AbsoluteUri == this.rssManagingUrl)
@@ -157,6 +140,8 @@ namespace FeedReader
                         manageCategory(response);
                     else if (requete.RequestUri.AbsoluteUri == this.rssManagingUrl)
                         manageRss(response);
+                    else if (requete.RequestUri.AbsoluteUri == this.logoutUrl)
+                        this.logoutEnd();
                     else
                         addFeed(response);
                 }
@@ -174,6 +159,18 @@ namespace FeedReader
                         Dispatcher.BeginInvoke(() => MessageBox.Show(ex.Message));
                 }
             }
+            Dispatcher.BeginInvoke(() => this.loaderGrid.Visibility = Visibility.Collapsed);
+        }
+
+        private void logoutEnd()
+        {
+            Dispatcher.BeginInvoke(() =>
+            {
+                MessageBox.Show("Login out successfuly.");
+                user = new UserDetail();
+                if (NavigationService.CanGoBack)
+                    NavigationService.GoBack();
+            });
         }
 
         private string getStringResponse(HttpWebRequest requete, IAsyncResult resultatAsynchrone)

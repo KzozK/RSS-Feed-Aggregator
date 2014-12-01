@@ -30,6 +30,7 @@ namespace FeedReader.View.Auth
         {
             if (this.emailTextBox.Text.Length > 0 && this.paswordTextBox.Text.Length > 0 && this.confirmPaswordTextBox.Text.Length > 0)
             {
+                Dispatcher.BeginInvoke(() => this.loaderGrid.Visibility = Visibility.Visible);
                 HttpWebRequest requete = (HttpWebRequest)HttpWebRequest.Create("http://rssfeedagregator.azurewebsites.net/api/account/register");
                 requete.Method = "POST";
                 requete.ContentType = "application/x-www-form-urlencoded";
@@ -108,6 +109,7 @@ namespace FeedReader.View.Auth
                 }
 
             }
+            Dispatcher.BeginInvoke(() => this.loaderGrid.Visibility = Visibility.Collapsed);
         }
 
         private void showJsonError(string reponse)

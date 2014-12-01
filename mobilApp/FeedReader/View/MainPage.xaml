@@ -47,7 +47,7 @@
                 </phone:LongListSelector>
                 <Button Content="Manage Feed" x:Name="addFeedButton" Click="manageFeedButton_Click" HorizontalAlignment="Left" Margin="50,647,0,0" VerticalAlignment="Top" Width="300" Background="#FF0EA16C" Foreground="Black" BorderBrush="#FF0EA16C" FontSize="26.667" FontWeight="Bold" FontFamily="Arial"/>
                 <Button Content="Manage category" HorizontalAlignment="Left" VerticalAlignment="Top" Width="300" Background="#FF0EA16C" BorderBrush="#FF0EA16C" Foreground="Black" FontFamily="Arial" FontSize="26.667" FontWeight="Bold" Margin="50,718,0,0" Click="manageCategoryButton_Click"/>
-                <Button x:Name="accountButton" Content="Account" HorizontalAlignment="Left" Margin="50,37,0,0" VerticalAlignment="Top" Width="300" Background="#FF0EA16C" BorderBrush="#FF0EA16C" Foreground="Black" FontFamily="Arial" FontSize="26.667" FontWeight="Bold" Click="accountButton_Click"/>
+                <Button x:Name="logoutButton" Content="Logout" HorizontalAlignment="Left" Margin="50,37,0,0" VerticalAlignment="Top" Width="300" Background="#FF0EA16C" BorderBrush="#FF0EA16C" Foreground="Black" FontFamily="Arial" FontSize="26.667" FontWeight="Bold" Click="logoutButton_Click"/>
 
             </Grid>
 
@@ -115,6 +115,12 @@
                 <Button Content="Change category name" Foreground="Orange" Width="300" Click="modifyCategoryButton_Click"/>
                 <Button Content="Close" Foreground="White" Width="300" Click="manageCategoryButton_Click"/>
 
+            </StackPanel>
+        </Grid>
+        <Grid x:Name="loaderGrid"  Background="Black" Opacity="0.7" Visibility="Collapsed">
+            <StackPanel VerticalAlignment="Center" HorizontalAlignment="Center">
+                <ProgressBar Background="White" Foreground="LightGreen" Height="30" Width="300" IsIndeterminate="True"/>
+                <TextBlock  Text="Please wait data is loading" FontSize="24" TextAlignment="Center"/>
             </StackPanel>
         </Grid>
     </Grid>

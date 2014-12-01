@@ -36,6 +36,7 @@ namespace FeedReader
         private string categoriesManagingUrl = "http://rssfeedagregator.azurewebsites.net/api/categories";
         private string getAllRssUrl = "http://rssfeedagregator.azurewebsites.net/api/rss/rss";
         private string rssManagingUrl = "http://rssfeedagregator.azurewebsites.net/api/rss";
+        private string logoutUrl = "http://rssfeedagregator.azurewebsites.net/api/account/logout";
         private string createAction = "POST";
         private string deleteAction = "DELETE";
         private string modifAction = "PUT";
@@ -297,9 +298,9 @@ namespace FeedReader
         #endregion
 
         #region ACCOUNT
-        private void accountButton_Click(object sender, RoutedEventArgs e)
+        private void logoutButton_Click(object sender, RoutedEventArgs e)
         {
-            NavigationService.Navigate(new Uri("/View/AccountSettingPage.xaml", UriKind.Relative));
+            this.getDataFromUrl(this.logoutUrl);
         }
         #endregion
     }

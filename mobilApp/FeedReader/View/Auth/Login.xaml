@@ -21,28 +21,34 @@
         </Grid.RowDefinitions>
 
         <!--TitlePanel contains the name of the application and page title-->
-           <StackPanel Grid.Row="0" Margin="12,17,0,28">
+        <StackPanel Grid.Row="0" Margin="12,17,0,28">
             <TextBlock TextWrapping="Wrap" TextAlignment="Center" Style="{StaticResource PhoneTextTitle2Style}">
             	<Run Text="Welcome to "/>
 <LineBreak/>
             	<Run Text=" RSS Feed Reader"/>
             </TextBlock>
             <TextBlock Text="To enjoy our application please log in." TextWrapping="Wrap" TextAlignment="Center" Margin="9,20,0,0" Style="{StaticResource PhoneTextTitle3Style}"/>
-            
+
         </StackPanel>
-            
+
         <!--ContentPanel - place additional content here-->
         <Grid x:Name="ContentPanel" Grid.Row="1" Margin="12,0,12,0">
-        	<StackPanel Margin="0" RenderTransformOrigin="1,1" Width="{Binding ActualWidth, ElementName=ContentPanel}" Height="{Binding ActualHeight, ElementName=ContentPanel}">
-        		<TextBlock TextWrapping="Wrap" Text="Login" Margin="10,0,0,0"/>
-        		<TextBox x:Name="loginBox" Height="{Binding Height, ElementName=passwordBox}" TextWrapping="Wrap" InputScope="LogOnName"/>
-        		<TextBlock TextWrapping="Wrap" Text="Password" Margin="10,0,0,0"/>
-        		<PasswordBox x:Name="passwordBox"/>
-        		<Button Content="Connection" Click="Connection_Click" />
-        		<TextBlock TextWrapping="Wrap" Margin="10,30,0,0" Text="You don't have account?"/>
-        		<Button Content="Create Account" Click="Create_Account_Click" />
-        	</StackPanel>
+            <StackPanel Margin="0" RenderTransformOrigin="1,1" Width="{Binding ActualWidth, ElementName=ContentPanel}" Height="{Binding ActualHeight, ElementName=ContentPanel}">
+                <TextBlock TextWrapping="Wrap" Text="Login" Margin="10,0,0,0"/>
+                <TextBox x:Name="loginBox" Height="{Binding Height, ElementName=passwordBox}" TextWrapping="Wrap" InputScope="LogOnName"/>
+                <TextBlock TextWrapping="Wrap" Text="Password" Margin="10,0,0,0"/>
+                <PasswordBox x:Name="passwordBox"/>
+                <Button Content="Connection" Click="Connection_Click" />
+                <TextBlock TextWrapping="Wrap" Margin="10,30,0,0" Text="You don't have account?"/>
+                <Button Content="Create Account" Click="Create_Account_Click" />
+            </StackPanel>
 
+        </Grid>
+        <Grid x:Name="loaderGrid" Visibility="Collapsed" Background="Black" Opacity="0.7" Margin="0,0,0,0" Grid.RowSpan="2">
+            <StackPanel VerticalAlignment="Center" HorizontalAlignment="Center">
+                <ProgressBar Background="White" Foreground="LightGreen" Height="30" Width="300" IsIndeterminate="True"/>
+                <TextBlock  Text="Please wait data is loading" FontSize="24" TextAlignment="Center"/>
+            </StackPanel>
         </Grid>
     </Grid>
 
