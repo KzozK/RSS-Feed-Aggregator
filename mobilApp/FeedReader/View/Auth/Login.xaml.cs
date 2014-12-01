@@ -23,7 +23,7 @@ namespace FeedReader
         public const string fileName = "UserDetails";
         UserDetail user = new UserDetail();
 
-        public Login() // CALLED FIRST, BEFORE MAINPAGE
+        public Login()
         {
             InitializeComponent();
             //restore();

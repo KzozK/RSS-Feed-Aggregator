@@ -28,7 +28,7 @@ namespace FeedReader.View.Auth
 
         private void createAccountButton_Click(object sender, RoutedEventArgs e)
         {
-            if (this.emailTextBox.Text.Length > 0 && this.paswordTextBox.Text.Length > 0 && this.confirmPaswordTextBox.Text.Length > 0)
+            if (this.emailTextBox.Text.Length > 0 && this.paswordTextBox.Password.Length > 0 && this.confirmPaswordTextBox.Password.Length > 0)
             {
                 Dispatcher.BeginInvoke(() => this.loaderGrid.Visibility = Visibility.Visible);
                 HttpWebRequest requete = (HttpWebRequest)HttpWebRequest.Create("http://rssfeedagregator.azurewebsites.net/api/account/register");
@@ -54,7 +54,7 @@ namespace FeedReader.View.Auth
                     {
 
                         Stream postStream = requete.EndGetRequestStream(resultatAsynchrone);
-                        string postData = string.Format("Email={0}&Password={1}&ConfirmPassword={2}", this.emailTextBox.Text, this.paswordTextBox.Text, this.confirmPaswordTextBox.Text);
+                        string postData = string.Format("Email={0}&Password={1}&ConfirmPassword={2}", this.emailTextBox.Text, this.paswordTextBox.Password, this.confirmPaswordTextBox.Password);
 
                         byte[] tableau = Encoding.UTF8.GetBytes(postData);
                         postStream.Write(tableau, 0, postData.Length);
