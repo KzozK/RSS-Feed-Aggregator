@@ -75,7 +75,6 @@
     </Compile>
     <Compile Include="LocalizedStrings.cs" />
     <Compile Include="LoginUnitTest.cs" />
-    <Compile Include="UnitTest1.cs" />
     <Compile Include="MainPage.xaml.cs">
       <DependentUpon>MainPage.xaml</DependentUpon>
     </Compile>

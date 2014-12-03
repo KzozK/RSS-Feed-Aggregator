@@ -14,6 +14,7 @@ using System.Text;
 using Newtonsoft.Json.Linq;
 using Newtonsoft.Json;
 using FeedReader.Model;
+using System.Net.NetworkInformation;
 
 namespace FeedReader.View.Auth
 {
@@ -25,9 +26,20 @@ namespace FeedReader.View.Auth
 
 
         }
-
+        private bool checkConection()
+        {
+            if (!NetworkInterface.GetIsNetworkAvailable())
+            {
+                MessageBox.Show("You're internet connection is not available please try again later");
+                return false;
+            }
+            return true;
+        }
         private void createAccountButton_Click(object sender, RoutedEventArgs e)
         {
+            if (!checkConection())
+                return;
+
             if (this.emailTextBox.Text.Length > 0 && this.paswordTextBox.Password.Length > 0 && this.confirmPaswordTextBox.Password.Length > 0)
             {
                 Dispatcher.BeginInvoke(() => this.loaderGrid.Visibility = Visibility.Visible);

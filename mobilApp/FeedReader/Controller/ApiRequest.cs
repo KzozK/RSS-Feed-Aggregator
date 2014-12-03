@@ -22,6 +22,8 @@ namespace FeedReader
         #region Create REQUEST
         private void getDataFromUrl(string url)
         {
+            if (!checkConection())
+                return;
             Dispatcher.BeginInvoke(() => this.loaderGrid.Visibility = Visibility.Visible);
             if (NetworkInterface.GetIsNetworkAvailable() == false)
             {
@@ -143,7 +145,10 @@ namespace FeedReader
                     else if (requete.RequestUri.AbsoluteUri == this.logoutUrl)
                         this.logoutEnd();
                     else
+                    {
                         addFeed(response);
+                        dataManaging.saveCategoryData(this.categoryList);
+                    }
                 }
                 catch (WebException ex)
                 {
@@ -172,7 +177,6 @@ namespace FeedReader
                     NavigationService.GoBack();
             });
         }
-
         private string getStringResponse(HttpWebRequest requete, IAsyncResult resultatAsynchrone)
         {
             WebResponse webResponse = requete.EndGetResponse(resultatAsynchrone);
@@ -312,6 +316,7 @@ namespace FeedReader
                 {
                     currentCat.rssFeedList.ElementAt(this.selectedFeedIndex).newsListe = feed;
                     this.NewsListBox.ItemsSource = feed.Items;
+                    dataManaging.saveRssFeed(feed, currentCat.rssFeedList.ElementAt(this.selectedFeedIndex).Name);
                 });
             }
             catch (XmlException ex)

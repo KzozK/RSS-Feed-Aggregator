@@ -15,6 +15,7 @@ using System.Runtime.Serialization;
 using System.Runtime.InteropServices.WindowsRuntime;
 using System.Text;
 using Newtonsoft.Json.Linq;
+using System.Net.NetworkInformation;
 
 namespace FeedReader
 {
@@ -22,62 +23,22 @@ namespace FeedReader
     {
         public const string fileName = "UserDetails";
         UserDetail user = new UserDetail();
+        DataSaver dataManaging = new DataSaver();
 
         public Login()
         {
             InitializeComponent();
-            //restore();
         }
 
-        #region Save to local file
-
-        private async void restore()
+        private bool checkConection()
         {
-            user = await restoreUserDetailAsync();
+            if (!NetworkInterface.GetIsNetworkAvailable())
+            {
+                MessageBox.Show("You're internet connection is not available please try again later");
+                return false;
+            }
+            return true;
         }
-
-        public async Task<UserDetail> restoreUserDetailAsync()
-        {
-            UserDetail userDetail = new UserDetail();
-            try
-            {
-                //no exception means file exists
-                StorageFile file = await ApplicationData.Current.LocalFolder.GetFileAsync(fileName);
-                IRandomAccessStream inStream = await file.OpenReadAsync();
-                // Deserialize the Session State.
-                DataContractSerializer serializer = new DataContractSerializer(typeof(UserDetail));
-                userDetail = (UserDetail)serializer.ReadObject(inStream.AsStreamForRead());
-                inStream.Dispose();
-            }
-            catch (FileNotFoundException ex)
-            {
-                //find out through exception 
-                return userDetail;
-            }
-            return userDetail;
-        }
-
-        public async Task saveUserDetailAsync() // store data in local file
-        {
-            try
-            {
-                StorageFile userdetailsfile = await ApplicationData.Current.LocalFolder.CreateFileAsync(fileName, CreationCollisionOption.ReplaceExisting);
-                IRandomAccessStream raStream = await userdetailsfile.OpenAsync(FileAccessMode.ReadWrite);
-                using (IOutputStream outStream = raStream.GetOutputStreamAt(0))
-                {
-                    // Serialize the Session State.
-                    DataContractSerializer serializer = new DataContractSerializer(typeof(UserDetail));
-                    serializer.WriteObject(outStream.AsStreamForWrite(), user);
-                    await outStream.FlushAsync();
-                }
-            }
-            catch (FileNotFoundException ex)
-            {
-                //find out through exception 
-            }
-        }
-
-        #endregion
 
         private bool checkLogInPassword()
         {
@@ -88,21 +49,40 @@ namespace FeedReader
             return false;
         }
 
+        private bool checkOfflineData()
+        {
+            if (user.login == loginBox.Text && user.password == passwordBox.Password)
+                return true;
+            MessageBox.Show("You don't have internet connection and you are not the last user which use this application");
+            return false;
+        }
+
         private void Connection_Click(object sender, RoutedEventArgs e)
         {
-            //    if (checkLogInPassword())
-            //    {
-            user.login = loginBox.Text;
-            user.password = passwordBox.Password;
+            if (checkLogInPassword())
+            {
+                if (!checkConection())
+                {
+                    if (user.login == null)
+                        user = dataManaging.loadLoginData();
+                    if (checkOfflineData())
+                    {
+                        PhoneApplicationService.Current.State["User"] = user;
+                        NavigationService.Navigate(new Uri("/View/MainPage.xaml", UriKind.Relative));
+                        return;
+                    }
+                }
+                user.login = loginBox.Text;
+                user.password = passwordBox.Password;
 
-            HttpWebRequest requete = (HttpWebRequest)HttpWebRequest.Create("http://rssfeedagregator.azurewebsites.net/api/account/login");
-            requete.Method = "POST";
-            requete.ContentType = "application/x-www-form-urlencoded";
+                HttpWebRequest requete = (HttpWebRequest)HttpWebRequest.Create("http://rssfeedagregator.azurewebsites.net/api/account/login");
+                requete.Method = "POST";
+                requete.ContentType = "application/x-www-form-urlencoded";
 
-            requete.BeginGetRequestStream(DebutReponse, requete);
-            //}
-            //else
-            //    MessageBox.Show("Please fill all the fields");
+                requete.BeginGetRequestStream(DebutReponse, requete);
+            }
+            else
+                MessageBox.Show("Please fill all the fields");
         }
 
         #region Post Requete handling
@@ -119,8 +99,8 @@ namespace FeedReader
                     {
 
                         Stream postStream = requete.EndGetRequestStream(resultatAsynchrone);
-                        //string postData = string.Format("Email={0}&Password={1}", user.login, user.password);
-                        string postData = string.Format("Email=test@test.com&Password=testes");
+                        string postData = string.Format("Email={0}&Password={1}", user.login, user.password);
+                        //string postData = string.Format("Email=test@test.com&Password=testes");
 
                         byte[] tableau = Encoding.UTF8.GetBytes(postData);
                         postStream.Write(tableau, 0, postData.Length);
@@ -154,8 +134,7 @@ namespace FeedReader
                     Dispatcher.BeginInvoke(() =>
                     {
                         user.token = reponse.Replace("\"", "");
-                        //await saveUserDetailAsync(); // sa plante apres 3 appel a verifier
-
+                        this.dataManaging.saveLoginData(user);
                         PhoneApplicationService.Current.State["User"] = user;
                         NavigationService.Navigate(new Uri("/View/MainPage.xaml", UriKind.Relative));
                     });

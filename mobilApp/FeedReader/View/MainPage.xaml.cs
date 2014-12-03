@@ -25,6 +25,7 @@ using Newtonsoft.Json;
 using System.Text;
 using System.Collections.ObjectModel;
 using System.ComponentModel;
+using System.Net.NetworkInformation;
 
 namespace FeedReader
 {
@@ -50,7 +51,7 @@ namespace FeedReader
         int downloadingCategoryId = 0;
         int selectedFeedIndex = 0;
         UserDetail user = new UserDetail();
-
+        DataSaver dataManaging = new DataSaver();
 
         // Constructor
         public MainPage()
@@ -59,7 +60,14 @@ namespace FeedReader
             SliderView.SelectedIndex = 1;
             this.action = this.createAction;
             this.CategoryLLS.ItemsSource = this.categoryList;
-            this.getDataFromUrl(this.getAllCategoriesUrl);
+
+            if (NetworkInterface.GetIsNetworkAvailable())
+                this.getDataFromUrl(this.getAllCategoriesUrl);
+            else
+            {
+                this.categoryList = dataManaging.loadCategoryData();
+                this.CategoryLLS.ItemsSource = this.categoryList;
+            }
         }
 
         protected override void OnNavigatedTo(NavigationEventArgs e)
@@ -69,6 +77,16 @@ namespace FeedReader
         }
         private void SlideView_OnSelectionChanged(object sender, EventArgs e)
         {
+        }
+
+        private bool checkConection()
+        {
+            if (!NetworkInterface.GetIsNetworkAvailable())
+            {
+                MessageBox.Show("You're internet connection is not available please try again later");
+                return false;
+            }
+            return true;
         }
 
         #region Search Func
@@ -127,10 +145,16 @@ namespace FeedReader
             selectedFeedIndex = listBox.SelectedIndex;
             downloadingCategoryId = rss.CategoryId;
 
-            // when selected do request
-            listBox.SelectedItem = -1;
+            listBox.SelectedIndex = -1;
             this.CategoryLLS.IsEnabled = false;
-            this.getDataFromUrl(rss.URL);
+            if (checkConection())
+                this.getDataFromUrl(rss.URL);
+            else
+            {
+                rss.newsListe = dataManaging.loadRssFeed(rss.Name);
+                this.NewsListBox.ItemsSource = rss.newsListe.Items;
+                this.CategoryLLS.IsEnabled = true;
+            }
         }
 
         #endregion
@@ -150,12 +174,14 @@ namespace FeedReader
 
         private void createCategoryButton_Click(object sender, RoutedEventArgs e)
         {
+            if (!checkConection())
+                return;
             if (this.catNameBox.Text == "")
             {
                 MessageBox.Show("Please write a name");
-                return ;
+                return;
             }
-            this.selectedCategory = new Category() { Name = this.catNameBox.Text, Id = 0};
+            this.selectedCategory = new Category() { Name = this.catNameBox.Text, Id = 0 };
             this.action = this.createAction;
 
             this.getDataFromUrl(this.categoriesManagingUrl);
@@ -198,6 +224,8 @@ namespace FeedReader
 
         private void manageFeedButton_Click(object sender, RoutedEventArgs e)
         {
+            if (!checkConection())
+                return;
             if (this.categoryList.Count == 0)
                 return;
             Visibility visibilityParam = (this.rssFeedManageGrid.Visibility == Visibility.Collapsed ? Visibility.Visible : Visibility.Collapsed);
@@ -276,8 +304,6 @@ namespace FeedReader
 
         private void CategoryLLS_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
-            //Debug.WriteLine();
-            // CategoryLLS.Visibility
         }
 
         #endregion
@@ -300,7 +326,13 @@ namespace FeedReader
         #region ACCOUNT
         private void logoutButton_Click(object sender, RoutedEventArgs e)
         {
-            this.getDataFromUrl(this.logoutUrl);
+            if (checkConection())
+                this.getDataFromUrl(this.logoutUrl);
+            else
+            {
+                if (NavigationService.CanGoBack)
+                    NavigationService.GoBack();
+            }
         }
         #endregion
     }

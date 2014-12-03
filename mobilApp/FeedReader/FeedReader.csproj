@@ -91,11 +91,11 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
-    <Compile Include="BankAccount.cs" />
     <Compile Include="Controller\ApiRequest.cs" />
     <Compile Include="App.xaml.cs">
       <DependentUpon>App.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Controller\DataSaver.cs" />
     <Compile Include="LocalizedStrings.cs" />
     <Compile Include="Model\Category.cs" />
     <Compile Include="Model\Rss.cs" />

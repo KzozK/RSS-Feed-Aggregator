@@ -52,15 +52,15 @@
             </Grid>
 
             <!-- MAIN VIEW-->
-            <Grid Background="GhostWhite">
+            <Grid Background="WhiteSmoke">
                 <Grid.RowDefinitions>
                     <RowDefinition Height="Auto"/>
                     <RowDefinition Height="*"/>
                 </Grid.RowDefinitions>
 
                 <StackPanel x:Name="TitlePanel" Grid.Row="0" Margin="10,10,10,35">
-                    <TextBlock Text="RSS FeedReader" Style="{StaticResource PhoneTextNormalStyle}" Margin="12,0" Foreground="Black"/>
-                    <TextBlock Text="Your feed" Margin="0,-7,0,0" Style="{StaticResource PhoneTextTitle1Style}" Foreground="Black"/>
+                    <TextBlock Text="RSS Feed Agregator" TextAlignment="Center" FontSize="30" Margin="12,0" Foreground="Black"/>
+                    <TextBlock Text="Your feed" TextAlignment="Center" FontSize="28" Margin="12,0" Foreground="Black"/>
                 </StackPanel>
 
                 <ListBox Grid.Row="1" x:Name="NewsListBox" SelectionChanged="NewsListBox_SelectionChanged" Margin="10,0,10,10">
@@ -68,7 +68,7 @@
                         <DataTemplate>
                             <StackPanel Orientation="Horizontal">
                                 <!--<Image Source="{Binding priorityImage}" Width="30" Height="30" />-->
-                                <TextBlock Foreground="Blue" Text="{Binding Title.Text}" Margin="0 0 0 10" />
+                                <TextBlock Foreground="Black" Text="{Binding Title.Text}" Margin="0 0 0 10" />
                             </StackPanel>
                         </DataTemplate>
                     </ListBox.ItemTemplate>
