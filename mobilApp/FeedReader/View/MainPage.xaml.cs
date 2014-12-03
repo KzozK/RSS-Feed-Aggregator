@@ -335,5 +335,10 @@ namespace FeedReader
             }
         }
         #endregion
+
+        private void menuButton_Click(object sender, RoutedEventArgs e)
+        {
+            SliderView.SelectedIndex = (SliderView.SelectedIndex == 1) ? 0 : 1;
+        }
     }
 }

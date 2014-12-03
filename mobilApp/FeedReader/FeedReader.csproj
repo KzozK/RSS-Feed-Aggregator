@@ -156,8 +156,7 @@
     <Content Include="Assets\ApplicationIcon.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
-    <Content Include="Assets\Images\green.png" />
-    <Content Include="Assets\Images\red.png" />
+    <Content Include="Assets\Images\menu.png" />
     <Content Include="Assets\Images\rss64x.png" />
     <Content Include="Assets\Tiles\FlipCycleTileLarge.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>

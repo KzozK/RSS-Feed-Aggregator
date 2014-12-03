@@ -58,9 +58,12 @@
                     <RowDefinition Height="*"/>
                 </Grid.RowDefinitions>
 
+                <Button x:Name="menuButton" Click="menuButton_Click" FontSize="40" Height="80" Width="80" Margin="-45,-60,380,0">
+                    <Image Source="/Assets/Images/menu.png" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                </Button>
                 <StackPanel x:Name="TitlePanel" Grid.Row="0" Margin="10,10,10,35">
-                    <TextBlock Text="RSS Feed Agregator" TextAlignment="Center" FontSize="30" Margin="12,0" Foreground="Black"/>
-                    <TextBlock Text="Your feed" TextAlignment="Center" FontSize="28" Margin="12,0" Foreground="Black"/>
+                    <TextBlock Text="RSS Feed Agregator" Width="300" TextAlignment="Center" FontSize="30" Margin="12,0" Foreground="Black"/>
+                    <TextBlock Text="Your feed" Width="300" TextAlignment="Center" FontSize="28" Margin="12,0" Foreground="Black"/>
                 </StackPanel>
 
                 <ListBox Grid.Row="1" x:Name="NewsListBox" SelectionChanged="NewsListBox_SelectionChanged" Margin="10,0,10,10">
@@ -79,7 +82,7 @@
 
 
         <Grid x:Name="MaskGrid" Background="Black" Opacity="0.7" Visibility="Collapsed" />
-        
+
         <!--MANAGE RSS-->
         <Grid x:Name="rssFeedManageGrid" Background="Black" Margin="10,10,10,10" Visibility="Collapsed">
             <StackPanel VerticalAlignment="Center">
