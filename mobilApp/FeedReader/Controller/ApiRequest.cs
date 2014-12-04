@@ -323,8 +323,6 @@ namespace FeedReader
             {
                 Debug.WriteLine(ex.Message);
             }
-            Dispatcher.BeginInvoke(() => this.CategoryLLS.IsEnabled = true);
-
         }
         #endregion
 

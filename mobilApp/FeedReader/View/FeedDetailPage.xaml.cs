@@ -37,14 +37,9 @@ namespace FeedReader.View
             else this.dateTextBlock.Visibility = Visibility.Collapsed;
 
             //image
-            if (feed.Links != null)
+            if (feed.Summary != null)
             {
-                this.descWebBrowser.Navigate(feed.Links.First().Uri);
-                //foreach (SyndicationLink link in feed.Links)
-                //    if (link.MediaType != null && link.MediaType.StartsWith("image"))
-                //    {
-                //        this.descWebBrowser.Navigate(feed.Links.First().Uri);//feed.Links.First().Uri);//this.descWebBrowser.NavigateToString(feed.Summary.Text);
-                //    }
+                this.descWebBrowser.NavigateToString(feed.Summary.Text);
             }
             else this.descWebBrowser.Visibility = Visibility.Collapsed;
 

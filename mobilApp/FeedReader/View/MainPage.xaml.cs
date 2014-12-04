@@ -146,14 +146,12 @@ namespace FeedReader
             downloadingCategoryId = rss.CategoryId;
 
             listBox.SelectedIndex = -1;
-            this.CategoryLLS.IsEnabled = false;
             if (checkConection())
                 this.getDataFromUrl(rss.URL);
             else
             {
                 rss.newsListe = dataManaging.loadRssFeed(rss.Name);
                 this.NewsListBox.ItemsSource = rss.newsListe.Items;
-                this.CategoryLLS.IsEnabled = true;
             }
         }
 

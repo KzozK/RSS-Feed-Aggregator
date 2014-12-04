@@ -14,25 +14,19 @@
     shell:SystemTray.IsVisible="True">
 
     <!--LayoutRoot is the root grid where all page content is placed-->
-    <Grid x:Name="LayoutRoot" Background="Transparent">
+    <Grid x:Name="LayoutRoot" Background="WhiteSmoke">
         <Grid.RowDefinitions>
             <RowDefinition Height="Auto"/>
             <RowDefinition Height="*"/>
         </Grid.RowDefinitions>
 
-        <!--TitlePanel contains the name of the application and page title-->
-        <StackPanel Grid.Row="0" Margin="12,17,0,28">
-            <TextBlock Text="RSS Feed Agregator" HorizontalAlignment="Center" FontSize="30"/>
-        </StackPanel>
-
-        <!--ContentPanel - place additional content here-->
         <Grid x:Name="ContentPanel" Margin="12,10" Grid.Row="1">
 
             <StackPanel >
-                <TextBlock x:Name="titleTextBlock" TextWrapping="Wrap" TextAlignment="Left" Text="title" Margin="0 10 0 10"/>
-                <TextBlock x:Name="dateTextBlock" TextWrapping="Wrap" TextAlignment="Left" Text="Date" Margin="0 10 0 10"/>
-                <TextBlock x:Name="authorTextBlock" TextWrapping="Wrap" TextAlignment="Left" Text="Author" Margin="0 10 0 10"/>
-                <phone:WebBrowser x:Name="descWebBrowser" HorizontalAlignment="Left" Margin="10 10 0 10" VerticalAlignment="Top" Height="516" Width="436" Navigated="descWebBrowser_Navigated"/>
+                <TextBlock x:Name="titleTextBlock" TextWrapping="Wrap" Foreground="Black" TextAlignment="Center" Text="Title" Margin="0 10 0 10" FontSize="30"/>
+                <TextBlock x:Name="dateTextBlock" TextWrapping="Wrap" Foreground="Black" TextAlignment="Left" Text="Date" Margin="0 10 0 10"/>
+                <TextBlock x:Name="authorTextBlock" TextWrapping="Wrap" Foreground="Black" TextAlignment="Left" Text="Author" Margin="0 10 0 10"/>
+                <phone:WebBrowser x:Name="descWebBrowser" HorizontalAlignment="Left" Margin="10 10 0 10" VerticalAlignment="Top" Height="594" Width="436" Navigated="descWebBrowser_Navigated"/>
                 <TextBlock Height="1"/>
             </StackPanel>
         </Grid>
