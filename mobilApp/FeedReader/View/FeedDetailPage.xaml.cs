@@ -50,5 +50,11 @@ namespace FeedReader.View
         {
         }
 
+        protected override void OnNavigatedFrom(NavigationEventArgs e)
+        {
+            base.OnNavigatedFrom(e);
+            return;
+        }
+
     }
 }

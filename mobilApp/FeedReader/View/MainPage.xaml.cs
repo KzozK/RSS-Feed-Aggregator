@@ -338,5 +338,10 @@ namespace FeedReader
         {
             SliderView.SelectedIndex = (SliderView.SelectedIndex == 1) ? 0 : 1;
         }
+        protected override void OnNavigatedFrom(NavigationEventArgs e)
+        {
+            base.OnNavigatedFrom(e);
+            return;
+        }
     }
 }

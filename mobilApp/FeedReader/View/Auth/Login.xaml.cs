@@ -190,5 +190,11 @@ namespace FeedReader
         }
 
         #endregion
+
+        protected override void OnNavigatedFrom(NavigationEventArgs e)
+        {
+            base.OnNavigatedFrom(e);
+            return;
+        }
     }
 }
